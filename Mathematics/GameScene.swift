@@ -14,22 +14,13 @@ class GameScene: SKScene {
   private var label : SKLabelNode?
   private var numberNode : SKShapeNode?
   private var numberLabels: [SKLabelNode] = []
-  
-  private let instructions = [
-    "Hi! Welcome to Mathematics. Tap to continue.",
-    """
-1, 2, 3, 4, 5, 6, ...
-    
-are the natural numbers.
-"""
-  ]
+  private var currentStep: Int = 0
   
   override func didMove(to view: SKView) {
-    self.label = SKLabelNode(text: instructions[0])
+    self.label = SKLabelNode(text: "Hi! Welcome to Mathematics. Tap to continue.")
     if let label = self.label {
       label.numberOfLines = 0
       label.preferredMaxLayoutWidth = self.size.width
-      label.text = instructions[0]
       label.alpha = 0.0
       label.position = CGPoint(x: self.size.width / 2, y: self.size.height / 2)
       label.fontSize = 50.0
@@ -46,17 +37,47 @@ are the natural numbers.
   }
   
   func touchUp(atPoint pos : CGPoint) {
+    switch currentStep {
+    case 0:
+      stepZero()
+      currentStep += 1
+    case 1:
+      stepOne()
+      currentStep += 1
+    default:
+      break
+    }
+    
+    
+  }
+  
+  private func stepZero() {
     guard let label = self.label else {
       return
     }
-    
+
     let fadeOut = SKAction.fadeOut(withDuration: 0.2)
     label.run(fadeOut, completion: {
-      self.displayNumbers(upTo: 6)
+      self.displayNumbers(
+        upTo: 7,
+        atPosition: CGPoint(x: 0.0, y: self.size.height / 2),
+        completion: {
+          label.text = "These are the natural numbers"
+          label.position = CGPoint(x: self.size.width / 2, y: (self.size.height / 2) - 200)
+          label.run(SKAction.fadeIn(withDuration: 0.2))
+      })
     })
   }
   
-  private func displayNumbers(upTo finalNumber: Int) {
+  private func stepOne() {
+    removeAllChildren()
+  }
+  
+  private func displayNumbers(
+    upTo finalNumber: Int,
+    atPosition position: CGPoint,
+    completion: @escaping () -> Void
+    ) {
     let circleDiameter: CGFloat = 80.0
     let circleRadius: CGFloat = circleDiameter / 2.0
     let spacing: CGFloat = 20.0
@@ -76,15 +97,18 @@ are the natural numbers.
         var xPosition: CGFloat
         var yPosition: CGFloat
         if x == 0 {
-          xPosition = spacing + circleRadius
+          xPosition = position.x + spacing + circleRadius
         } else {
-          xPosition = spacing + circleRadius + (CGFloat(x) * (circleDiameter + spacing))
+          xPosition = position.x
+            + spacing
+            + circleRadius
+            + (CGFloat(x) * (circleDiameter + spacing))
         }
         
         if y == 0 {
-          yPosition = self.size.height - (spacing + circleRadius)
+          yPosition = position.y
         } else {
-          yPosition = self.size.height - (spacing + circleRadius + (CGFloat(y) * (circleDiameter + spacing)))
+          yPosition = position.y - (spacing + circleRadius + (CGFloat(y) * (circleDiameter + spacing)))
         }
         
         node.position = CGPoint(x: xPosition, y: yPosition)
@@ -96,17 +120,18 @@ are the natural numbers.
       }
     }
     
-    fadeInNumbersConsecutively(fromIndex: 0)
+    fadeInNumbersConsecutively(fromIndex: 0, completion: completion)
   }
   
-  func fadeInNumbersConsecutively(fromIndex index: Int) {
+  private func fadeInNumbersConsecutively(fromIndex index: Int, completion: @escaping () -> Void) {
     guard index < numberLabels.count else {
+      completion()
       return
     }
     
-    let fadeIn = SKAction.fadeIn(withDuration: 1.0)
+    let fadeIn = SKAction.fadeIn(withDuration: 0.4)
     numberLabels[index].run(fadeIn) {
-      self.fadeInNumbersConsecutively(fromIndex: index + 1)
+      self.fadeInNumbersConsecutively(fromIndex: index + 1, completion: completion)
     }
   }
   
