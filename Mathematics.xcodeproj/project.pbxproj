@@ -8,15 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		11766005206C3B8D0063A14F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11766004206C3B8D0063A14F /* AppDelegate.swift */; };
-		11766007206C3B8D0063A14F /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 11766006206C3B8D0063A14F /* GameScene.sks */; };
 		11766009206C3B8D0063A14F /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 11766008206C3B8D0063A14F /* Actions.sks */; };
-		1176600B206C3B8D0063A14F /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1176600A206C3B8D0063A14F /* GameScene.swift */; };
+		1176600B206C3B8D0063A14F /* StepZeroScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1176600A206C3B8D0063A14F /* StepZeroScene.swift */; };
 		1176600D206C3B8D0063A14F /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1176600C206C3B8D0063A14F /* GameViewController.swift */; };
 		11766010206C3B8D0063A14F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1176600E206C3B8D0063A14F /* Main.storyboard */; };
 		11766012206C3B8D0063A14F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 11766011206C3B8D0063A14F /* Assets.xcassets */; };
 		11766015206C3B8D0063A14F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11766013206C3B8D0063A14F /* LaunchScreen.storyboard */; };
 		11766020206C3B8D0063A14F /* MathematicsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1176601F206C3B8D0063A14F /* MathematicsTests.swift */; };
 		1176602B206C3B8D0063A14F /* MathematicsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1176602A206C3B8D0063A14F /* MathematicsUITests.swift */; };
+		11DD44C12081BE6800EEC3FA /* StepOneScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DD44C02081BE6800EEC3FA /* StepOneScene.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,9 +39,8 @@
 /* Begin PBXFileReference section */
 		11766001206C3B8D0063A14F /* Mathematics.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mathematics.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		11766004206C3B8D0063A14F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		11766006206C3B8D0063A14F /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
 		11766008206C3B8D0063A14F /* Actions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Actions.sks; sourceTree = "<group>"; };
-		1176600A206C3B8D0063A14F /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
+		1176600A206C3B8D0063A14F /* StepZeroScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepZeroScene.swift; sourceTree = "<group>"; };
 		1176600C206C3B8D0063A14F /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		1176600F206C3B8D0063A14F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		11766011206C3B8D0063A14F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -53,6 +52,7 @@
 		11766026206C3B8D0063A14F /* MathematicsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MathematicsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1176602A206C3B8D0063A14F /* MathematicsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MathematicsUITests.swift; sourceTree = "<group>"; };
 		1176602C206C3B8D0063A14F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		11DD44C02081BE6800EEC3FA /* StepOneScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepOneScene.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,10 +103,9 @@
 		11766003206C3B8D0063A14F /* Mathematics */ = {
 			isa = PBXGroup;
 			children = (
+				11DD44C42081C8D700EEC3FA /* StepScenes */,
 				11766004206C3B8D0063A14F /* AppDelegate.swift */,
-				11766006206C3B8D0063A14F /* GameScene.sks */,
 				11766008206C3B8D0063A14F /* Actions.sks */,
-				1176600A206C3B8D0063A14F /* GameScene.swift */,
 				1176600C206C3B8D0063A14F /* GameViewController.swift */,
 				1176600E206C3B8D0063A14F /* Main.storyboard */,
 				11766011206C3B8D0063A14F /* Assets.xcassets */,
@@ -132,6 +131,15 @@
 				1176602C206C3B8D0063A14F /* Info.plist */,
 			);
 			path = MathematicsUITests;
+			sourceTree = "<group>";
+		};
+		11DD44C42081C8D700EEC3FA /* StepScenes */ = {
+			isa = PBXGroup;
+			children = (
+				1176600A206C3B8D0063A14F /* StepZeroScene.swift */,
+				11DD44C02081BE6800EEC3FA /* StepOneScene.swift */,
+			);
+			path = StepScenes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -242,7 +250,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				11766010206C3B8D0063A14F /* Main.storyboard in Resources */,
-				11766007206C3B8D0063A14F /* GameScene.sks in Resources */,
 				11766012206C3B8D0063A14F /* Assets.xcassets in Resources */,
 				11766015206C3B8D0063A14F /* LaunchScreen.storyboard in Resources */,
 				11766009206C3B8D0063A14F /* Actions.sks in Resources */,
@@ -270,8 +277,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1176600B206C3B8D0063A14F /* GameScene.swift in Sources */,
+				1176600B206C3B8D0063A14F /* StepZeroScene.swift in Sources */,
 				1176600D206C3B8D0063A14F /* GameViewController.swift in Sources */,
+				11DD44C12081BE6800EEC3FA /* StepOneScene.swift in Sources */,
 				11766005206C3B8D0063A14F /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

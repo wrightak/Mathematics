@@ -9,12 +9,23 @@
 import SpriteKit
 import GameplayKit
 
-class GameScene: SKScene {
-  
+class StepZeroScene: SKScene {
+
   private var label : SKLabelNode?
-  private var numberNode : SKShapeNode?
   private var numberLabels: [SKLabelNode] = []
-  private var currentStep: Int = 0
+  private var displayStarted: Bool = false
+  private var displayFinished: Bool = false
+  
+  let transitionToNextScene: () -> Void
+  
+  init(size: CGSize, transitionToNextScene: @escaping () -> Void) {
+    self.transitionToNextScene = transitionToNextScene
+    super.init(size: size)
+  }
+  
+  required init?(coder aDecoder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
   
   override func didMove(to view: SKView) {
     self.label = SKLabelNode(text: "Hi! Welcome to Mathematics. Tap to continue.")
@@ -23,35 +34,25 @@ class GameScene: SKScene {
       label.preferredMaxLayoutWidth = self.size.width
       label.alpha = 0.0
       label.position = CGPoint(x: self.size.width / 2, y: self.size.height / 2)
-      label.fontSize = 50.0
+      label.fontSize = 36.0
       self.addChild(label)
       label.run(SKAction.fadeIn(withDuration: 2.0))
     }
   }
   
-  
-  func touchDown(atPoint pos : CGPoint) {
-  }
-  
-  func touchMoved(toPoint pos : CGPoint) {
-  }
-  
   func touchUp(atPoint pos : CGPoint) {
-    switch currentStep {
-    case 0:
-      stepZero()
-      currentStep += 1
-    case 1:
-      stepOne()
-      currentStep += 1
-    default:
-      break
+    if displayFinished {
+      transitionToNextScene()
+      return
     }
     
-    
+    if !displayStarted {
+      displayNumbersAndText()
+      displayStarted = true
+    }
   }
   
-  private func stepZero() {
+  private func displayNumbersAndText() {
     guard let label = self.label else {
       return
     }
@@ -64,13 +65,9 @@ class GameScene: SKScene {
         completion: {
           label.text = "These are the natural numbers"
           label.position = CGPoint(x: self.size.width / 2, y: (self.size.height / 2) - 200)
-          label.run(SKAction.fadeIn(withDuration: 0.2))
+          label.run(SKAction.fadeIn(withDuration: 0.2), completion: { self.displayFinished = true })
       })
     })
-  }
-  
-  private func stepOne() {
-    removeAllChildren()
   }
   
   private func displayNumbers(
@@ -78,9 +75,9 @@ class GameScene: SKScene {
     atPosition position: CGPoint,
     completion: @escaping () -> Void
     ) {
-    let circleDiameter: CGFloat = 80.0
+    let circleDiameter: CGFloat = 40.0
     let circleRadius: CGFloat = circleDiameter / 2.0
-    let spacing: CGFloat = 20.0
+    let spacing: CGFloat = 10.0
     let horizontalNodeCount: Int = Int(floor((self.size.width - spacing) / (circleDiameter + spacing)))
     let verticalNodeCount: Int = 10
     
@@ -135,25 +132,12 @@ class GameScene: SKScene {
     }
   }
   
-  override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-    for t in touches { self.touchDown(atPoint: t.location(in: self)) }
-  }
-  
-  override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-    for t in touches { self.touchMoved(toPoint: t.location(in: self)) }
-  }
-  
   override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
     for t in touches { self.touchUp(atPoint: t.location(in: self)) }
   }
   
   override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
     for t in touches { self.touchUp(atPoint: t.location(in: self)) }
-  }
-  
-  
-  override func update(_ currentTime: TimeInterval) {
-    // Called before each frame is rendered
   }
 }
 
